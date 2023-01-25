@@ -15,7 +15,12 @@ const getPlantById = (req, res) => {
   })
 }
 
+const addPlant = (req, res) => {
+  console.log("REQQQQ: ", req.body)
+}
+
 module.exports = {
   getAllPlants,
   getPlantById,
+  addPlant,
 }

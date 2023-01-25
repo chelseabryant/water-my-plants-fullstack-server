@@ -4,4 +4,9 @@ VALUES ('${name}', '${email}', '${password}')
 RETURNING id, username, email;
 `
 
-module.exports = { CREATE_ACCOUNT }
+const LOGIN = (email) => `
+SELECT * FROM accounts
+WHERE email = '${email}'
+`
+
+module.exports = { CREATE_ACCOUNT, LOGIN }
