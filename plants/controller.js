@@ -5,6 +5,7 @@ const {
   ADD_PLANT,
   GET_ADDED_PLANTS,
   REMOVE_PLANT,
+  GET_MY_PLANTS,
 } = require("./queries")
 
 const getAllPlants = (req, res) => {
@@ -50,8 +51,17 @@ const addPlant = (req, res) => {
 }
 
 const removePlant = (req, res) => {
-  // pool.query(REMOVE_PLANT)
-  console.log(req.body)
+  pool.query(REMOVE_PLANT(req.body.user, req.body.plant), (error, results) => {
+    if (error) throw error
+    res.status(200).json(results.rows[0])
+  })
+}
+
+const getMyPlants = (req, res) => {
+  pool.query(GET_MY_PLANTS(req.query.user_id), (error, results) => {
+    if (error) throw error
+    res.status(200).json(results.rows)
+  })
 }
 
 module.exports = {
@@ -59,4 +69,5 @@ module.exports = {
   getPlantById,
   addPlant,
   removePlant,
+  getMyPlants,
 }
